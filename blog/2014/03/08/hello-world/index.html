@@ -5,12 +5,62 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hello World - 不死鸟</title>
+  <title>NSArray - 不死鸟</title>
   <meta name="author" content="ftxbird">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,7 +119,7 @@
   
   <header>
     
-      <h1 class="entry-title">Hello World</h1>
+      <h1 class="entry-title">NSArray</h1>
     
     
       <p class="meta">
@@ -93,6 +143,121 @@
 
 
 <div class="entry-content">
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSArray</span><span class="err">的两个限制</span>
+</span><span class='line'><span class="mf">1.</span><span class="err">只能存储</span><span class="n">Objective</span><span class="o">-</span><span class="n">C</span><span class="err">的对象</span>
+</span><span class='line'><span class="mf">2.</span><span class="err">不能存储</span><span class="nb">nil</span> <span class="p">(</span><span class="err">对象的零值或</span><span class="nb">NULL</span><span class="err">值</span><span class="p">)</span>
+</span><span class='line'>      
+</span><span class='line'><span class="c1">//创建数组 的两种方式, 后一种不必以nil结尾</span>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="s">@&quot;one&quot;</span><span class="p">,</span><span class="s">@&quot;two&quot;</span><span class="p">,</span><span class="s">@&quot;Three&quot;</span><span class="p">,</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//添加nil代表列表结束,这就是为什么不能在数组中存储nil的一个原因</span>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">array2</span> <span class="o">=</span><span class="err">@</span><span class="p">[</span><span class="s">@&quot;one&quot;</span><span class="p">,</span><span class="s">@&quot;two&quot;</span><span class="p">,</span><span class="s">@&quot;three&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//循环输出数组中元素内容两种方式</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">NSInteger</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="p">[</span><span class="n">array</span> <span class="n">count</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">array2</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//[array arrayByAddingObject:@&quot;FOURR&quot;];   //实际无法添加,NSArray不可改变</span>
+</span><span class='line'><span class="c1">//array[0]=@&quot;four&quot;;   //不可改变</span>
+</span><span class='line'>      
+</span><span class='line'><span class="n">NSArray</span><span class="err">创建的是不可变对象的数组</span><span class="p">,</span><span class="err">它是固定的</span><span class="p">,</span><span class="err">既不能添加任何元素也不能删元素</span><span class="p">.</span>
+</span><span class='line'>      
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">NSInteger</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="p">[</span><span class="n">array</span> <span class="n">count</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,[</span><span class="n">array</span> <span class="nl">objectAtIndex:</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//切分数组</span>
+</span><span class='line'><span class="n">NSString</span><span class="o">*</span><span class="n">string</span> <span class="o">=</span><span class="s">@&quot;c:c++:java:objective-c:php&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSArray</span><span class="o">*</span><span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">string</span> <span class="nl">componentsSeparatedByString:</span><span class="s">@&quot;:&quot;</span><span class="p">];</span>
+</span><span class='line'>      
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">NSInteger</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="p">[</span><span class="n">chunks</span> <span class="n">count</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">chunks</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>      
+</span><span class='line'><span class="c1">//合并数组为字符串</span>
+</span><span class='line'><span class="n">string</span> <span class="o">=</span> <span class="p">[</span><span class="n">chunks</span> <span class="nl">componentsJoinedByString:</span><span class="s">@&quot;:-(&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">string</span><span class="p">);</span>
+</span><span class='line'>      
+</span><span class='line'><span class="c1">//可变数组NSMutableArray通过类方法arrayWithCapacity来创建新的可变数组</span>
+</span><span class='line'><span class="c1">//+(id) arrayWithCapacity: (NSInteger) numItems</span>
+</span><span class='line'><span class="n">NSMutableArray</span><span class="o">*</span> <span class="n">array4</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nl">arrayWithCapacity:</span><span class="mi">20</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//添加数组对象</span>
+</span><span class='line'><span class="p">[</span><span class="n">array4</span> <span class="nl">addObject:</span><span class="s">@&quot;hello&quot;</span><span class="p">];</span>  <span class="c1">//索引为0</span>
+</span><span class='line'><span class="p">[</span><span class="n">array4</span> <span class="nl">addObject:</span><span class="s">@&quot;world&quot;</span><span class="p">];</span>  <span class="c1">//索引为1</span>
+</span><span class='line'><span class="p">[</span><span class="n">array4</span> <span class="nl">addObject:</span><span class="s">@&quot;你好世界&quot;</span><span class="p">];</span> <span class="c1">//索引为2</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">NSInteger</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="p">[</span><span class="n">array4</span> <span class="n">count</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">array4</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//删除数组对象</span>
+</span><span class='line'><span class="p">[</span><span class="n">array4</span> <span class="nl">removeObject:</span><span class="s">@&quot;hello&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="c1">//删除hello后,数组索引会自动更新,world的索引将为0你好世界的索引为1</span>
+</span><span class='line'><span class="p">[</span><span class="n">array4</span> <span class="nl">removeObjectAtIndex:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="n">NSInteger</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="p">[</span><span class="n">array4</span> <span class="n">count</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">array4</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//值得注意的是:可变数组没有快速创建数组的方法,类似</span>
+</span><span class='line'><span class="c1">//NSArray * array2 = @[@&quot;one&quot;,@&quot;two&quot;,@&quot;three&quot;];</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -144,7 +309,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/03/08/hello-world/">Hello World</a>
+        <a href="/blog/2014/03/08/hello-world/">NSArray</a>
       </li>
     
   </ul>
