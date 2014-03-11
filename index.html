@@ -9,58 +9,8 @@
   <meta name="author" content="ftxbird">
 
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52 &hellip;">
+  <meta name="description" content="-retain
+计数器+1 ,会返回对象本身 -release 计数器-1,没有返回值 -retainCount 获取当前的计数器,返回类型为NSUInteger -dealloc 当一个对象要被回收的时候,就会调用,一定要调用[super dealloc], 这句调用要放在最后面 僵尸对象: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,6 +66,111 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/11/shou-dong-nei-cun-guan-li-%5B%3F%5D/">手动内存管理(一)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-11T16:07:17+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>-retain
+计数器+1 ,会返回对象本身</p>
+
+<p>-release</p>
+
+<p>计数器-1,没有返回值</p>
+
+<p>-retainCount</p>
+
+<p>获取当前的计数器,返回类型为NSUInteger</p>
+
+<p>-dealloc</p>
+
+<p>当一个对象要被回收的时候,就会调用,一定要调用[super dealloc],</p>
+
+<p>这句调用要放在最后面</p>
+
+<p>僵尸对象:所占用内存已经被回收的时候,僵尸对象不能再使用</p>
+
+<p>野指针:指向僵尸对象(不可用内存)的指针,给野指针发送消息会报错</p>
+
+<p>(EXC_BAD_ACESSS)</p>
+
+<p>空指针:没用指向任何东西的指针(存储的东西是nil ,NULL,0),给空指针发送消息不会报错.生成的set方法里面,release旧值, retain新值</p>
+
+<h2>谁 retain 谁release</h2>
+
+<h4>set方法的实现</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBook:</span><span class="p">(</span><span class="n">Book</span><span class="o">*</span><span class="p">)</span><span class="nv">book</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">book</span><span class="o">!=</span><span class="n">_book</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">_book</span> <span class="n">release</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">_book</span> <span class="o">=</span><span class="p">[</span><span class="n">book</span> <span class="n">retain</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>dealloc方法的实现</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">_book</span> <span class="n">dealloc</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//生成的set方法里面,retain旧值 retain新值</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">retain</span><span class="p">)</span> <span class="n">Book</span><span class="o">*</span> <span class="n">book</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -279,6 +334,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/11/shou-dong-nei-cun-guan-li-%5B%3F%5D/">手动内存管理(一)</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/03/08/hello-world/">NSArray</a>
