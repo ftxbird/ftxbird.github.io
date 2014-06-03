@@ -86,7 +86,9 @@
 
 
 <time datetime="2014-03-11T16:07:17+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2014</time>
-        
+         
+          | <a href="#comments">Comments</a>
+         
       </p>
     
   </header>
@@ -157,7 +159,7 @@
 </span><span class='line'>    <span class="p">[</span><span class="n">_book</span> <span class="n">dealloc</span><span class="p">];</span>
 </span><span class='line'>    <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
 </span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">//生成的set方法里面,retain旧值 retain新值</span>
+</span><span class='line'><span class="c1">//生成的set方法里面,release旧值 retain新值</span>
 </span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">retain</span><span class="p">)</span> <span class="n">Book</span><span class="o">*</span> <span class="n">book</span>
 </span><span class='line'>
 </span></code></pre></td></tr></table></div></figure>
